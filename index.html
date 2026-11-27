@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CAT HOUSE | Premium Cat Shop</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header class="header">
+  <a class="brand" href="#">
+    <span class="brand-icon">🐈</span>
+    <span>CAT HOUSE<small>ARANYA PET SHOP</small></span>
+  </a>
+
+  <nav>
+    <a href="#home">หน้าแรก</a>
+    <a href="#shop">สินค้า</a>
+    <a href="#about">เกี่ยวกับเรา</a>
+  </nav>
+
+  <div class="header-actions">
+    <button class="admin-btn" onclick="openAdminLogin()">ADMIN</button>
+    <button class="cart-btn" onclick="toggleCart()">
+      🛒 <span id="cartCount">0</span>
+    </button>
+  </div>
+</header>
+
+
+<section class="hero" id="home">
+  <div class="hero-content">
+    <span class="tag">
+      THE BEST FOR YOUR CAT
+      <small>สิ่งที่ดีที่สุดสำหรับแมวของคุณ</small>
+    </span>
+
+    <h1>
+      Everything Your<br>
+      Cat Deserves.
+    </h1>
+
+    <p>
+      Choose the best for your little family member.
+      <br>
+      <span>เลือกสิ่งที่ดีที่สุดให้สมาชิกตัวน้อยของคุณ</span>
+      <br><br>
+
+      Food, treats, and everything your cat needs.
+      <br>
+      <span>รวมอาหาร ขนม และของใช้ที่แมวของคุณต้องการ</span>
+    </p>
+
+    <a href="#shop" class="main-btn">
+      SHOP NOW → <small>เลือกซื้อสินค้า</small>
+    </a>
+  </div>
+
+ <div class="hero-image">
+  <img src="./170594.jpg" alt="Cute Cats">
+</div>
+</section>
+
+<section class="benefits">
+  <div>🚚 <span>จัดส่งทั่วประเทศ</span></div>
+  <div>💎 <span>สินค้าคุณภาพ</span></div>
+  <div>🐾 <span>เพื่อเจ้าเหมียวโดยเฉพาะ</span></div>
+</section>
+
+<main class="shop-section" id="shop">
+  <div class="section-top">
+    <div>
+      <span class="tag">OUR COLLECTION</span>
+      <h2>สินค้าแนะนำ</h2>
+      <p>ค้นพบสินค้าที่ดีที่สุดสำหรับเจ้าเหมียว</p>
+    </div>
+    <input type="search" id="searchInput"
+           placeholder="ค้นหาสินค้า...">
+  </div>
+
+  <div class="categories">
+    <button class="category active" data-category="ทั้งหมด">ทั้งหมด</button>
+    <button class="category" data-category="อาหาร">อาหารแมว</button>
+    <button class="category" data-category="ขนม">ขนม</button>
+    <button class="category" data-category="ของใช้">ของใช้</button>
+    <button class="category" data-category="ของเล่น">ของเล่น</button>
+  </div>
+
+  <div class="product-grid" id="productGrid"></div>
+</main>
+
+<section class="about-section" id="about">
+  <div>
+    <span class="tag">ABOUT CAT HOUSE</span>
+    <h2>เพราะแมวคือสมาชิก<br>คนสำคัญของครอบครัว</h2>
+    <p>เราคัดสรรสินค้าเพื่อสุขภาพและความสุขของแมวทุกตัว</p>
+  </div>
+  <div class="about-icon">🐱</div>
+</section>
+
+<footer>
+  <h2>CAT HOUSE</h2>
+  <p>Premium Cat Shop · Made with love for cats.</p>
+  <small>© 2026 CAT HOUSE. All rights reserved.</small>
+</footer>
+
+<!-- CART -->
+<div class="overlay" id="overlay" onclick="closePanels()"></div>
+
+<aside class="cart-panel" id="cartPanel">
+  <div class="panel-heading">
+    <h2>ตะกร้าสินค้า</h2>
+    <button onclick="closePanels()">✕</button>
+  </div>
+  <div id="cartItems" class="cart-items"></div>
+  <div class="cart-footer">
+    <div class="total">
+      <span>ยอดรวม</span>
+      <strong id="cartTotal">฿0</strong>
+    </div>
+    <button class="main-btn full-btn" onclick="checkout()">
+      ดำเนินการสั่งซื้อ
+    </button>
+  </div>
+</aside>
+
+<!-- ADMIN LOGIN -->
+<div class="modal" id="loginModal">
+  <div class="modal-box login-box">
+    <button class="modal-close" onclick="closeLogin()">✕</button>
+    <h2>Admin Login</h2>
+    <p>เข้าสู่ระบบจัดการร้านค้า</p>
+
+    <form id="loginForm">
+      <label>ชื่อผู้ใช้</label>
+      <input id="username" required placeholder="Username">
+
+      <label>รหัสผ่าน</label>
+      <input id="password" type="password"
+             required placeholder="Password">
+
+      <button class="main-btn full-btn">เข้าสู่ระบบ</button>
+      <p id="loginError" class="error"></p>
+    </form>
+  </div>
+</div>
+
+<!-- ADMIN DASHBOARD -->
+<div class="admin-layout" id="adminLayout">
+  <div class="admin-top">
+    <div>
+      <span class="tag">CAT HOUSE MANAGEMENT</span>
+      <h2>ระบบจัดการร้านค้า</h2>
+    </div>
+    <button onclick="logoutAdmin()" class="logout-btn">ออกจากระบบ</button>
+  </div>
+
+  <div class="stats">
+    <div class="stat-card">
+      <span>สินค้าทั้งหมด</span>
+      <strong id="totalProducts">0</strong>
+    </div>
+    <div class="stat-card">
+      <span>สินค้าคงเหลือ</span>
+      <strong id="totalStock">0</strong>
+    </div>
+    <div class="stat-card warning">
+      <span>สินค้าใกล้หมด (5 ชิ้นหรือน้อยกว่า)</span>
+      <strong id="lowStock">0</strong>
+    </div>
+  </div>
+
+  <div class="admin-content">
+    <div class="admin-title">
+      <h3>จัดการสินค้า</h3>
+      <button class="main-btn" onclick="openProductForm()">
+        + เพิ่มสินค้าใหม่
+      </button>
+    </div>
+
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>สินค้า</th>
+            <th>หมวดหมู่</th>
+            <th>ราคา</th>
+            <th>สต็อก</th>
+            <th>จัดการ</th>
+          </tr>
+        </thead>
+        <tbody id="adminProducts"></tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<!-- ADD / EDIT PRODUCT -->
+<div class="modal" id="productModal">
+  <div class="modal-box product-form-box">
+    <button class="modal-close" onclick="closeProductForm()">✕</button>
+    <h2 id="formTitle">เพิ่มสินค้า</h2>
+
+    <form id="productForm">
+      <input type="hidden" id="productId">
+
+      <label>ชื่อสินค้า</label>
+      <input id="productName" required placeholder="ชื่อสินค้า">
+
+      <label>หมวดหมู่</label>
+      <select id="productCategory">
+        <option value="อาหาร">อาหารแมว</option>
+        <option value="ขนม">ขนม</option>
+        <option value="ของใช้">ของใช้</option>
+        <option value="ของเล่น">ของเล่น</option>
+      </select>
+
+      <label>ราคา (บาท)</label>
+      <input id="productPrice" type="number" min="0"
+             required placeholder="ราคา">
+
+      <label>จำนวนสินค้าในสต็อก</label>
+      <input id="productStock" type="number" min="0"
+             required placeholder="จำนวนสินค้า">
+
+      <label>รูปภาพสินค้า (URL)</label>
+      <input id="productImage" type="url"
+             placeholder="https://example.com/image.jpg">
+
+      <label>หรืออัปโหลดรูปจากเครื่อง</label>
+      <input id="imageFile" type="file" accept="image/*">
+
+      <div class="image-preview" id="imagePreview">
+        <span>ตัวอย่างรูปสินค้า</span>
+      </div>
+
+      <label>รายละเอียดสินค้า</label>
+      <textarea id="productDescription"
+                placeholder="รายละเอียดสินค้า"></textarea>
+
+      <button class="main-btn full-btn">บันทึกสินค้า</button>
+    </form>
+  </div>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
